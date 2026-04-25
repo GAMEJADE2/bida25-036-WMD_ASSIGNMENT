@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Glow Haven</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  
+
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html"
+class="nav-logo">Glow <span>Haven</span></a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="tips.html">Tips</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </div>  
+    </div>
+</nav>
+
+
+<section class="section-pad">
+    <div class="container">
+        <div class="form-wrap">
+            <h2 class="section-title">Appointment <span>Details</span></h2>
+            <div class="divider left"></div>
+
+            <form id="bookingForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span>*</span></label>
+                        <input type="text" id="firstName" placeholder="e.g. Aisha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span>*</span></label>
+                        <input type="text" id="lastName" placeholder="e.g. Mokoena" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span>*</span></label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span>*</span></label>
+                        <input type="tel" id="phone" placeholder="+267 71 234 567" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Service Required <span>*</span></label>
+                        <select id="service" required>
+                            <option value="">-- Select a service --</option>
+                            <optgroup label="Skincare">
+                                <option value="deep-cleanse">Deep Cleanse Facial (P250)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apptDate">Preferred Date <span>*</span></label>
+                        <input type="date" id="apptDate" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" placeholder="Any allergies or special requests..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-pink">Confirm Booking</button>
+
+                <div class="success-msg" id="bookingSuccess" style="display:none;">
+                    ✅ Thank you! Your booking request has been received.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

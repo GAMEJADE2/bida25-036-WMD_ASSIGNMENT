@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Glow Haven – learn about our story, mission and team of beauty professionals.">
+  <meta name="description" content="About Glow Haven – learn about our story, mission and team.">
   <title>About Us | Glow Haven</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 
   <!-- Your CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- NAVBAR -->
@@ -34,33 +33,54 @@
       <span></span><span></span><span></span>
     </div>
   </div>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="tips.html">Tips</a>
+    <a href="booking.html">Booking</a>
+    <a href="contact.html">Contact</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<div class="page-hero">
-  <div class="container text-center">
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> / About
+    </div>
     <h1>About Glow Haven</h1>
-    <p>Our story, our mission, our passion for beauty</p>
+    <p>Our story, mission & passion</p>
   </div>
-</div>
+</section>
 
-<!-- ABOUT SECTION -->
+<!-- ABOUT -->
 <section class="section-pad">
   <div class="container about-two-col">
 
     <div class="about-img">🌸</div>
 
     <div class="about-text">
-      <h2>Beauty With <span>Purpose</span></h2>
+      <span class="hero-tag">Our Story</span>
+      <h2 class="section-title left">Beauty With <span>Purpose</span></h2>
+      <div class="divider left"></div>
+
       <p>
         Glow Haven was founded on the belief that beauty is more than appearance —
         it is confidence, wellness and self-expression.
       </p>
+
       <p>
-        Based in Gaborone, Botswana, we serve a vibrant community of beauty lovers.
+        Based in Gaborone, Botswana, we serve a vibrant community of beauty lovers
+        who value high-quality skincare and beauty services.
       </p>
+
       <p>
-        Our team brings together experience in facials, makeup, nail care and skincare.
+        Our team combines expertise in facials, makeup, nails and skincare consultation —
+        all under one roof.
       </p>
     </div>
 
@@ -71,23 +91,28 @@
 <section class="section-pad bg-pale">
   <div class="container text-center">
 
-    <h2>Our Values</h2>
+    <h2 class="section-title">Our <span>Values</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">What we stand for</p>
 
     <div class="cards-grid">
 
-      <div class="card">
-        <h3>💎 Quality First</h3>
+      <div class="card center">
+        <div class="icon">💎</div>
+        <h3>Quality First</h3>
         <p>We use premium, skin-safe products.</p>
       </div>
 
-      <div class="card">
-        <h3>🤝 Client-Centred</h3>
-        <p>Every service is personalised.</p>
+      <div class="card center">
+        <div class="icon">🤝</div>
+        <h3>Client-Centred</h3>
+        <p>Every service is personalised to you.</p>
       </div>
 
-      <div class="card">
-        <h3>🌿 Wellness Focus</h3>
-        <p>Beauty and wellness go hand in hand.</p>
+      <div class="card center">
+        <div class="icon">🌿</div>
+        <h3>Wellness Focus</h3>
+        <p>We nurture both skin and mind.</p>
       </div>
 
     </div>
@@ -98,23 +123,30 @@
 <section class="section-pad">
   <div class="container text-center">
 
-    <h2>Meet Our Team</h2>
+    <h2 class="section-title">Meet Our <span>Team</span></h2>
+    <div class="divider"></div>
 
     <div class="cards-grid">
 
-      <div class="card">
+      <div class="card center">
+        <div class="card-img">👩‍🦰</div>
         <h3>Mokgabo Wadikonyana</h3>
-        <p>Founder & Aesthetician</p>
+        <span class="role">Founder & Aesthetician</span>
+        <p>8+ years in skincare & facial treatments.</p>
       </div>
 
-      <div class="card">
+      <div class="card center">
+        <div class="card-img">👩🏾</div>
         <h3>Cleon Smith</h3>
-        <p>Makeup Artist</p>
+        <span class="role">Makeup Artist</span>
+        <p>Specialises in bridal & natural glam.</p>
       </div>
 
-      <div class="card">
+      <div class="card center">
+        <div class="card-img">👩🏽‍🦱</div>
         <h3>Resego Moarabi</h3>
-        <p>Nail Technician</p>
+        <span class="role">Nail Technician</span>
+        <p>Creative nail artist with 5+ years experience.</p>
       </div>
 
     </div>
@@ -122,17 +154,43 @@
 </section>
 
 <!-- CTA -->
-<section class="text-center" style="padding:50px; background:pink;">
-  <h2>Ready to Glow?</h2>
-  <a href="booking.html" class="btn btn-light">Book Now</a>
+<section class="cta">
+  <div class="container text-center">
+    <h2>Ready to Experience Glow Haven?</h2>
+    <p>Book your appointment today</p>
+    <a href="booking.html" class="btn btn-white">Book Now</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer text-center">
-  <p>© 2026 Glow Haven</p>
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <a href="index.html" class="nav-logo">Glow <span>Haven</span></a>
+      <p>Your beauty sanctuary.</p>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>📍 Gaborone</p>
+      <p>📞 +267 71 234 567</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Glow Haven</p>
+  </div>
 </footer>
 
 <script src="js/main.js"></script>
-
 </body>
 </html>
