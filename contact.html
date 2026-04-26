@@ -1,94 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | Glow Haven</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glow Haven | Contact</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  
-
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+<main id="main-content">
+<!-- NAVBAR -->
 <nav class="navbar">
-    <div class="container">
-        <a href="index.html"
-class="nav-logo">Glow <span>Haven</span></a>
-
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="tips.html">Tips</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-        </div>  
+  <div class="container">
+    <a href="index.html" class="nav-logo">Glow <span>Haven</span></a>
+ 
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="services.html">Services</a>
+      <a href="tips.html">Tips</a>
+      <a href="booking.html">Booking</a>
+      <a href="contact.html" class="active" aria-current="page">Contact</a>
     </div>
-</nav>
-
-  <div class="page-hero">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <p>We would love to hear from you — get in touch with our team</p>
+ 
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
     </div>
   </div>
-
-  <section class="section-pad">
-    <div class="container">
-      <div class="contact-layout">
-
-        <div class="contact-form-container">
-          <h2 class="section-title">Send Us a <span>Message</span></h2>
-          <form id="contactForm">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="cName">Your Name <span>*</span></label>
-                <input type="text" id="cName" required placeholder="e.g. Kefilwe Dube" />
-              </div>
-              <div class="form-group">
-                <label for="cEmail">Email Address <span>*</span></label>
-                <input type="email" id="cEmail" required placeholder="you@example.com" />
-              </div>
-              <div class="form-group full">
-                <label for="cSubject">Subject <span>*</span></label>
-                <input type="text" id="cSubject" required placeholder="Enquiry about facials" />
-              </div>
-              <div class="form-group full">
-                <label for="cMessage">Your Message <span>*</span></label>
-                <textarea id="cMessage" required placeholder="Write here..." style="min-height: 120px;"></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn-pink">Send Message</button>
-          </form>
+ 
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="booking.html">Booking</a>
+  </div>
+</nav>
+ 
+<!-- CONTACT SECTION -->
+<section class="contact">
+  <div class="container">
+    <h2>Get In Touch 💕</h2>
+    <p>We’d love to hear from you. Send us a message or visit us.</p>
+ 
+    <div class="contact-wrapper">
+ 
+      <!-- CONTACT FORM -->
+      <form id="contactForm">
+ 
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+          <small class="error" id="nameErr"></small>
         </div>
-
-        <div class="contact-info-card">
-          <h3>Get in Touch</h3>
-          <div class="contact-item">
-            <span class="icon">📍</span>
-            <div>
-              <h4>Location</h4>
-              <p>Plot 1234, Main Mall, Gaborone</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="icon">📞</span>
-            <div>
-              <h4>Phone</h4>
-              <p>+267 71 234 567</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="icon">✉️</span>
-            <div>
-              <h4>Email</h4>
-              <p>hello@glowhaven.bw</p>
-            </div>
-          </div>
+ 
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          <small class="error" id="emailErr"></small>
         </div>
-
+ 
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="message" rows="5" placeholder="Write your message..."></textarea>
+          <small class="error" id="messageErr"></small>
+        </div>
+ 
+        <button type="submit" class="btn">Send Message</button>
+ 
+      </form>
+ 
+      <!-- CONTACT INFO -->
+      <div class="contact-info">
+        <h3>Visit Us 🌸</h3>
+        <p><strong>Location:</strong> Gaborone, Botswana</p>
+        <p><strong>Phone:</strong> +267 71 234 567</p>
+        <p><strong>Email:</strong> glowhaven@gmail.com</p>
+ 
+        <h3>Opening Hours ⏰</h3>
+        <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+        <p>Saturday: 10:00 AM - 4:00 PM</p>
+        <p>Sunday: Closed</p>
       </div>
+ 
     </div>
-  </section>
-
+  </div>
+</section>
+</main>
+ 
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+ 
+    <div>
+      <h3>Glow Haven</h3>
+      <p>Your sanctuary for beauty and self-care.</p>
+    </div>
+ 
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="tips.html">Tips</a>
+      <a href="booking.html">Booking</a>
+      <a href="contact.html">Contact</a>
+    </div>
+ 
+    <div>
+      <h4>Contact</h4>
+      <p>Gaborone, Botswana</p>
+      <p>+267 71 234 567</p>
+    </div>
+ 
+  </div>
+ 
+  <div class="footer-bottom">
+    <p>© 2026 Glow Haven</p>
+  </div>
+</footer>
+ 
+<!-- JS -->
+<script src="js/script.js"></script>
+ 
 </body>
 </html>
+ 
