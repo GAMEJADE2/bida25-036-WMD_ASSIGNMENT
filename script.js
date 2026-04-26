@@ -1,117 +1,996 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const bookingForm = document.getElementById("bookingForm");
-
-    bookingForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Stops page from refreshing
-
-        // 1. Get the values directly from the IDs in your HTML
-        const firstName = document.getElementById("firstName").value;
-        const lastName = document.getElementById("lastName").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const service = document.getElementById("service").value;
-        const date = document.getElementById("date").value;  // Matches your id="date"
-        const time = document.getElementById("time").value;  // Matches your id="time"
-        const notes = document.getElementById("message").value; // Matches your id="message"
-
-        // 2. The WhatsApp Number
-        const whatsappNumber = "26777462000";
-
-        // 3. Create the message using backticks
-        const message = `Hello Glow Haven! 💖
-I would like to book an appointment:
-👤 Name: ${firstName} ${lastName}
-📧 Email: ${email}
-📞 Phone: ${phone}
-💅 Service: ${service}
-📅 Date: ${date}
-⏰ Time: ${time}
-📄 Notes: ${notes || "None"}
-
-Thank you!`;
-
-        // 4. Send the message
-        const encodedMessage = encodeURIComponent(message);
-        const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-        
-        window.open(url, '_blank');
-        
-        // Optional: Reset form after sending
-        bookingForm.reset();
-    });
-});
-
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-    
-    // Simple feedback for the user
-    const btn = e.target.querySelector('button');
-    const originalText = btn.innerText;
-    
-    btn.innerText = "Sending...";
-    btn.disabled = true;
-
-    setTimeout(() => {
-        alert("Message sent! We'll get back to you in Gaborone soon.");
-        btn.innerText = originalText;
-        btn.disabled = false;
-        e.target.reset();
-    }, 1500);
-});
-// Applies fade-in animation to all service cards (including new ones like Nail Care)
-
-const observerOptions = {
-    threshold: 0.2
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-
-            // Stop observing after animation is triggered (better performance)
-            observer.unobserve(entry.target);
-        }
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
     });
-}, observerOptions);
-
-// Observe all cards safely
-document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll('.card');
-
-    cards.forEach(card => {
-        observer.observe(card);
-    });
-});
-
-// cta banner
-
-document.addEventListener("DOMContentLoaded", () => {
-    const ctaElement = document.querySelector('.cta-content');
-
-    if (ctaElement) {
-        observer.observe(ctaElement);
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
     }
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const galleryItems = document.querySelectorAll(".gallery-item");
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.1
     });
-
-    galleryItems.forEach((item) => {
-        item.style.opacity = "0";
-        item.style.transform = "translateY(20px)";
-        item.style.transition = "all 0.5s ease-out";
-
-        revealObserver.observe(item);
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
     });
 });
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});
+ 
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});
+ 
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("bookingForm");
+ 
+  const name = document.getElementById("FirstName");
+  const email = document.getElementById("email");
+  const service = document.getElementById("service");
+  const date = document.getElementById("date");
+  const message = document.getElementById("email");
+ 
+  const successMsg = document.getElementById("successMsg");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log("button clicked");
+    alert("Booking Sent!");
+ 
+  });
+ 
+    // Hide all errors first
+    document.querySelectorAll(".error-msg").forEach(msg => {
+      msg.style.display = "none";
+    });
+ 
+    // Validation
+    if (name.value.trim() === "") {
+      name.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (email.value.trim() === "") {
+      email.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (service.value === "") {
+      service.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (date.value === "") {
+      date.nextElementSibling.style.display = "block";
+      isValid = false;
+    }
+ 
+    if (!isValid) return;
+ 
+    // Create booking object
+    const booking = {
+      name: name.value,
+      email: email.value,
+      service: service.value,
+      date: date.value,
+      message: message.value,
+      time: new Date().toLocaleString()
+    };
+ 
+    // Get existing bookings OR empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+ 
+    // Add new booking
+    bookings.push(booking);
+ 
+    // Save back to storage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+ 
+    console.log("New Booking Saved:", booking);
+ 
+    // Success UI
+    successMsg.style.display = "block";
+    form.reset();
+ 
+    setTimeout(() => {
+      successMsg.style.display = "none";
+    }, 3000);
+  });
+ 
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.gallery-item');
+ 
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+ 
+                // Stop observing after animation (performance boost)
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+ 
+    items.forEach(item => {
+        // Initial hidden state
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+ 
+        observer.observe(item);
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+});
+ 
