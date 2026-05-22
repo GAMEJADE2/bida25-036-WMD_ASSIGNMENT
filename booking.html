@@ -1,309 +1,158 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Glow Haven | Booking</title>
-
-  <link rel="stylesheet" href="style.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Haven | Booking</title>
+<link rel="stylesheet" href="style2.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <main id="main-content">
-
- 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<main id="main-content">
 
 <!-- NAVBAR -->
-
 <nav class="navbar">
+<div class="container">
+<a href="index.html" class="nav-logo">Glow <span>Haven</span></a>
 
-  <div class="container">
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="gallery.html">Gallery</a>
+<a href="services.html">Services</a>
+<a href="tips.html">Tips</a>
+<a href="booking.html" class="active" aria-current="page">Booking</a>
+<a href="contact.html">Contact</a>
+</div>
 
-    <a href="index.html" class="nav-logo">Glow <span>Haven</span></a>
+<div class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</div>
+</div>
 
- 
-
-    <div class="nav-links">
-
-      <a href="index.html">Home</a>
-
-      <a href="about.html">About</a>
-
-      <a href="gallery.html">Gallery</a>
-
-      <a href="services.html">Services</a>
-
-      <a href="tips.html">Tips</a>
-
-      <a href="booking.html" class="active" aria-current="page">Booking</a>
-
-      <a href="contact.html">Contact</a>
-
-    </div>
-
- 
-
-    <div class="hamburger" id="hamburger">
-
-      <span></span><span></span><span></span>
-
-    </div>
-
-  </div>
-
- 
-
-  <div class="nav-mobile" id="nav-mobile">
-
-    <a href="index.html">Home</a>
-
-    <a href="about.html">About</a>
-
-    <a href="services.html">Services</a>
-
-    <a href="booking.html">Booking</a>
-
-  </div>
-
+<div class="nav-mobile" id="nav-mobile">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="booking.html">Booking</a>
+</div>
 </nav>
 
- 
-
 <!-- BOOKING SECTION -->
-
 <section class="booking">
-
-  <div class="container">
-
-    <h2>Book Your Glow ✨</h2>
-
-    <p>Schedule your appointment and let us pamper you.</p>
-
- 
-
-    <form id="bookingForm">
-
- 
-
-      <!-- FIRST NAME -->
-
-      <div class="form-group">
-
-        <label>First Name</label>
-
-        <input type="text" id="firstName" placeholder="Enter your first name">
-
-        <small class="error" id="firstNameErr"></small>
-
-      </div>
-
- 
-
-      <!-- LAST NAME -->
-
-      <div class="form-group">
-
-        <label>Last Name</label>
-
-        <input type="text" id="lastName" placeholder="Enter your last name">
-
-        <small class="error" id="lastNameErr"></small>
-
-      </div>
-
- 
-
-      <!-- EMAIL -->
-
-      <div class="form-group">
-
-        <label>Email</label>
-
-        <input type="email" id="email" placeholder="Enter your email">
-
-        <small class="error" id="emailErr"></small>
-
-      </div>
-
- 
-
-      <!-- PHONE -->
-
-      <div class="form-group">
-
-        <label>Phone Number</label>
-
-        <input type="tel" id="phone" placeholder="e.g. 0712345678">
-
-        <small class="error" id="phoneErr"></small>
-
-      </div>
-
- 
-
-      <!-- SERVICE -->
-
-      <div class="form-group">
-
-        <label>Select Service</label>
-
-        <select id="service">
-
-          <option value="">-- Choose a service --</option>
-
-          <option value="facial">Facial Treatment</option>
-
-          <option value="massage">Full Body Massage</option>
-
-          <option value="nails">Manicure & Pedicure</option>
-
-          <option value="lashes">Lash Extensions</option>
-
-        </select>
-
-        <small class="error" id="serviceErr"></small>
-
-      </div>
-
- 
-
-      <!-- DATE -->
-
-      <div class="form-group">
-
-        <label>Booking Date</label>
-
-        <input type="date" id="date">
-
-        <small class="error" id="dateErr"></small>
-
-      </div>
-
- 
-
-      <!-- TIME -->
-
-      <div class="form-group">
-
-        <label>Preferred Time</label>
-
-        <input type="time" id="time">
-
-        <small class="error" id="timeErr"></small>
-
-      </div>
-
- 
-
-      <!-- MESSAGE -->
-
-      <div class="form-group">
-
-        <label>Additional Notes</label>
-
-        <textarea id="message" rows="4" placeholder="Any special requests..."></textarea>
-
-      </div>
-
- 
-
-      <!-- SUBMIT -->
-
-      <button type="submit" class="btn">Book Appointment</button>
-
- 
-
-    </form>
-
-  </div>
+<div class="container">
+<h2>Book Your Glow ✨</h2>
+<p>Schedule your appointment and let us pamper you.</p>
+
+<form id="bookingForm">
+
+<!-- FIRST NAME -->
+<div class="form-group">
+<label>First Name</label>
+<input type="text" id="firstName" placeholder="Enter your first name">
+<small class="error" id="firstNameErr"></small>
+</div>
+
+<!-- LAST NAME -->
+<div class="form-group">
+<label>Last Name</label>
+<input type="text" id="lastName" placeholder="Enter your last name">
+<small class="error" id="lastNameErr"></small>
+</div>
+
+<!-- EMAIL -->
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" placeholder="Enter your email">
+<small class="error" id="emailErr"></small>
+</div>
+
+<!-- PHONE -->
+<div class="form-group">
+<label>Phone Number</label>
+<input type="tel" id="phone" placeholder="e.g. 0712345678">
+<small class="error" id="phoneErr"></small>
+</div>
+
+<!-- SERVICE -->
+<div class="form-group">
+<label>Select Service</label>
+<select id="service">
+<option value="">-- Choose a service --</option>
+<option value="facial">Facial Treatment</option>
+<option value="massage">Full Body Massage</option>
+<option value="nails">Manicure & Pedicure</option>
+<option value="lashes">Lash Extensions</option>
+</select>
+<small class="error" id="serviceErr"></small>
+</div>
+
+<!-- DATE -->
+<div class="form-group">
+<label>Booking Date</label>
+<input type="date" id="date">
+<small class="error" id="dateErr"></small>
+</div>
+
+<!-- TIME -->
+<div class="form-group">
+<label>Preferred Time</label>
+<input type="time" id="time">
+<small class="error" id="timeErr"></small>
+</div>
+
+<!-- MESSAGE -->
+<div class="form-group">
+<label>Additional Notes</label>
+<textarea id="message" rows="4" placeholder="Any special requests..."></textarea>
+</div>
+
+<!-- SUBMIT -->
+<button type="submit" class="btn">Book Appointment</button>
+</form>
+</div>
 
 </section>
 
 </main>
 
- 
-
 <!-- FOOTER -->
-
 <footer class="footer">
-
-  <div class="container footer-grid">
-
- 
-
-    <div>
-
-      <h3>Glow Haven</h3>
-
-      <p>Your sanctuary for beauty and self-care.</p>
-
-    </div>
-
- 
-
-    <div>
-
-      <h4>Quick Links</h4>
-
-      <a href="index.html">Home</a>
-
-      <a href="about.html">About</a>
-
-      <a href="services.html">Services</a>
-
-      <a href="tips.html">Tips</a>
-
-      <a href="gallery.html">Gallery</a>
-
-      <a href="booking.html">Booking</a>
-
-      <a href="contact.html">Contact</a>
-
-    </div>
-
- 
-
-    <div>
-
-      <h4>Contact</h4>
-
-      <p>Gaborone, Botswana</p>
-
-      <p>+267 71 234 567</p>
-
-    </div>
-
- 
-
-  </div>
-
- 
-
-  <div class="footer-bottom">
-
-    <p>© 2026 Glow Haven</p>
-
-  </div>
-
+  <div class="container footer-grid">
+    <div>
+      <h3>Glow Haven</h3>
+      <p>Your sanctuary for beauty and self-care.</p>
+    </div>
+ 
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="tips.html">Tips</a>
+      <a href="booking.html">Booking</a>
+      <a href="contact.html">Contact</a>
+    </div>
+ 
+    <div>
+      <h4>Contact</h4>
+      <p>Gaborone, Botswana</p>
+      <p>+267 71 234 567</p>
+    </div>
+ 
+  </div>
+ 
+  <div class="footer-bottom">
+    <p>© 2026 Glow Haven</p>
+  </div>
 </footer>
-
- 
-
-<!-- JS FILE -->
-
-<script src="js/script.js"></script>
-
- 
-
+<script src="main.js"></script>
+ 
 </body>
-
-</html>
+</html> 
